@@ -1,51 +1,107 @@
 # PinoleroPrints
 
-Sitio web oficial de **PinoleroPrints** — Diseño, personalización y producción en Nicaragua.
+Sitio web oficial de **PinoleroPrints**: diseño, personalización y producción textil en Nicaragua.
 
-Servicios: sublimación, impresión DTF, bordado, grabado láser y diseño gráfico.
+[![Astro](https://img.shields.io/badge/Astro-6-BC52EE?logo=astro&logoColor=white)](https://astro.build)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A522.12-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Licencia](https://img.shields.io/badge/Licencia-Proprietaria-red)](LICENSE)
 
----
-
-## Tech Stack
-
-- [Astro](https://astro.build) v6 — Framework web
-- [Tailwind CSS](https://tailwindcss.com) v4 — Estilos utilitarios
-- Node.js >= 22.12.0
-- pnpm — Package manager
-- Desplegado en dominio propio: [pinoleroprints.rk8.dev](https://pinoleroprints.rk8.dev)
+> [!IMPORTANT]
+> Software **propietario**, desarrollado en colaboración entre **PinoleroPrints** y **RK8**. Todos los derechos reservados. No se permite su copia, clonación, redistribución ni uso comercial sin autorización escrita de ambos titulares. Consulta [LICENSE](LICENSE) antes de interactuar con este repositorio.
 
 ---
 
-## Estructura del Proyecto
+## Tabla de contenido
 
+- [Descripción](#descripción)
+- [Stack tecnológico](#stack-tecnológico)
+- [Requisitos](#requisitos)
+- [Instalación](#instalación)
+- [Scripts disponibles](#scripts-disponibles)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Convenciones](#convenciones)
+- [Despliegue](#despliegue)
+- [Licencia](#licencia)
+- [Autor](#autor)
+
+## Descripción
+
+PinoleroPrints es un sitio de una sola página (landing) orientado a la conversión, que presenta los servicios de sublimación, impresión DTF, bordado, grabado láser y diseño gráfico, junto con un catálogo de productos y canales de contacto directo.
+
+El sitio prioriza:
+
+- **Rendimiento**: generación estática (SSG) con Astro e imágenes optimizadas en WebP.
+- **SEO**: metadatos canónicos, Open Graph, Twitter Cards, datos estructurados `LocalBusiness` y sitemap.
+- **Accesibilidad**: contraste de color ajustado y navegación responsive.
+- **Mantenibilidad**: contenido tipado y separado de la capa de presentación.
+
+## Stack tecnológico
+
+| Tecnología | Versión | Rol |
+|---|---|---|
+| [Astro](https://astro.build) | 6 | Framework y generación estática |
+| [Tailwind CSS](https://tailwindcss.com) | 4 | Estilos utilitarios |
+| [Sharp](https://sharp.pixelplumbing.com) | 0.35 | Optimización de imágenes |
+| [pnpm](https://pnpm.io) | 11.10 | Gestor de paquetes |
+| Node.js | ≥ 22.12.0 | Entorno de ejecución |
+
+La integración `@astrojs/sitemap` genera el sitemap en el build.
+
+## Requisitos
+
+- Node.js `>= 22.12.0`
+- pnpm `11.x` (se recomienda instalarlo con [Corepack](https://nodejs.org/api/corepack.html): `corepack enable`)
+
+## Instalación
+
+```bash
+git clone git@github.com:RK8-HQ/PinoleroPrints.git
+cd PinoleroPrints
+pnpm install
 ```
-/
-├── public/                          # Archivos estáticos (favicon, CNAME, BingSiteAuth)
+
+> La clonación solo está autorizada al personal con permiso expreso del titular (ver [Licencia](#licencia)).
+
+## Scripts disponibles
+
+| Comando | Descripción |
+|---|---|
+| `pnpm dev` | Servidor de desarrollo en `http://localhost:4321` |
+| `pnpm build` | Build de producción en `./dist/` y copia del sitemap a `sitemap.xml` |
+| `pnpm preview` | Vista previa local del build |
+| `pnpm astro` | CLI de Astro (`astro check`, `astro add`, etc.) |
+
+Antes de abrir un PR o desplegar, el build debe completar sin errores:
+
+```bash
+pnpm build
+```
+
+## Estructura del proyecto
+
+```text
+.
+├── .github/workflows/deploy.yml   # CI/CD a GitHub Pages
+├── public/                        # Recursos estáticos (favicon, CNAME, og-image, robots.txt)
 ├── src/
-│   ├── assets/                      # Imágenes y recursos (WebP, SVG)
-│   │   ├── icons/                   # Iconos de redes sociales
-│   │   ├── index.ts                 # Barrel file: re-exporta todas las imágenes
-│   │   └── *.webp                   # Imágenes del sitio
-│   ├── components/                  # Componentes Astro reutilizables
-│   │   ├── Header.astro             # Navegación + menú responsive
-│   │   ├── HeroSection.astro        # Hero principal con CTA
-│   │   ├── ServicesSection.astro    # Grid de servicios
-│   │   ├── CatalogSection.astro     # Grid de productos del catálogo
-│   │   ├── AboutSection.astro       # Sección "Nosotros"
-│   │   ├── Footer.astro             # Footer con redes sociales
-│   │   └── index.ts                 # Barrel file: re-exporta todos los componentes
-│   ├── constants/                   # Datos y configuración tipados
-│   │   ├── urls.ts                  # URLs de redes sociales y contacto
-│   │   ├── services.ts              # Lista de servicios (tipada)
-│   │   ├── products.ts              # Lista de productos (tipada)
-│   │   ├── navigation.ts            # Links de navegación (tipados)
-│   │   └── index.ts                # Barrel file: re-exporta todas las constantes
-│   ├── layouts/
-│   │   └── Layout.astro             # Layout base con SEO, Open Graph, Twitter Cards
-│   ├── pages/
-│   │   └── index.astro              # Página principal (ensambla componentes)
-│   └── styles/
-│       └── global.css               # Tailwind CSS + estilos globales
+│   ├── assets/                    # Imágenes WebP/SVG y barrel de exportaciones
+│   │   └── icons/                 # Iconos de redes sociales
+│   ├── components/                # Componentes Astro reutilizables
+│   │   ├── Header.astro
+│   │   ├── HeroSection.astro
+│   │   ├── ServicesSection.astro
+│   │   ├── CatalogSection.astro
+│   │   ├── AboutSection.astro
+│   │   └── Footer.astro
+│   ├── constants/                 # Contenido y configuración tipados
+│   │   ├── urls.ts
+│   │   ├── services.ts
+│   │   ├── products.ts
+│   │   └── navigation.ts
+│   ├── layouts/Layout.astro       # Layout base: SEO, Open Graph, analytics
+│   ├── pages/index.astro          # Página principal
+│   └── styles/global.css          # Tailwind y estilos globales
 ├── astro.config.mjs
 ├── package.json
 ├── pnpm-lock.yaml
@@ -53,38 +109,37 @@ Servicios: sublimación, impresión DTF, bordado, grabado láser y diseño gráf
 └── tsconfig.json
 ```
 
----
+## Convenciones
 
-## Conventions
+- **Path alias**: `@/` apunta a `src/`. Ejemplo: `import { URLS } from "@/constants"`.
+- **Barrel files**: cada carpeta expone sus módulos mediante `index.ts`.
+- **Nomenclatura**: componentes en `PascalCase`; constantes y tipos en `camelCase` / `PascalCase`.
+- **Separación de responsabilidades**: los datos viven en `src/constants/` tipados de forma explícita; los componentes solo los consumen.
+- **Imágenes**: se importan desde `src/assets/` y se pasan como props desde la página.
 
-- **Path alias** `@/` → mapea a `src/`. Ej: `import { URLS } from "@/constants"`
-- **Barrel files** (`index.ts`) en cada carpeta para importar limpio
-- **Componentes** en PascalCase: `Header.astro`, `HeroSection.astro`
-- **Datos** separados de la vista en `src/constants/` con tipos explícitos
-- **Imágenes** se pasan como props desde la página a los componentes
+## Despliegue
 
----
+El despliegue es automático: cada push a `main` dispara el workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), que instala dependencias con `--frozen-lockfile`, ejecuta el build y publica `dist/` en **GitHub Pages**.
 
-## Comandos
+- Dominio: [pinoleroprints.rk8.dev](https://pinoleroprints.rk8.dev)
+- El dominio personalizado se configura en `public/CNAME`.
+- Analytics: Cloudflare Web Analytics.
 
-| Comando | Acción |
-|---|---|
-| `pnpm install` | Instalar dependencias |
-| `pnpm dev` | Iniciar servidor de desarrollo (`localhost:4321`) |
-| `pnpm build` | Compilar sitio de producción en `./dist/` |
-| `pnpm preview` | Vista previa del build local |
+## Licencia
 
----
+Este software es una obra desarrollada en colaboración entre **PinoleroPrints** y **RK8**, y se distribuye bajo una **licencia propietaria restrictiva**. Copyright © 2026 PinoleroPrints y RK8 (-RK8HQ). **Todos los derechos reservados.**
 
-## Desarrollo
+Los derechos de propiedad intelectual son **cotitulares**: ninguna de las partes puede otorgar licencias, ceder o autorizar el uso del software a terceros sin el consentimiento previo y por escrito de la otra. No se concede permiso para copiar, clonar, bifurcar (fork), redistribuir, modificar, sublicenciar ni utilizar este software, su código fuente o sus recursos con fines comerciales o de cualquier otra índole. El acceso al repositorio no otorga ningún derecho de uso.
 
-1. Clonar el repositorio.
-2. Ejecutar `pnpm install`.
-3. Usar `pnpm dev` para desarrollo local.
-4. Antes de deployar, verificar con `pnpm build`.
+Las marcas y elementos de identidad de cada parte pertenecen a su respectivo titular. En caso de conflicto con un contrato escrito entre ambas partes, prevalece el contrato.
 
----
+El texto legal completo está en [LICENSE](LICENSE).
 
-## Deployment
+## Autor
 
-El sitio se despliega desde la rama `main`. El hosting apunta a `pinoleroprints.rk8.dev` con el archivo `public/CNAME` para el dominio personalizado.
+**PinoleroPrints y RK8 (-RK8HQ)**
+
+- GitHub: [@RK8-HQ](https://github.com/RK8-HQ)
+- Sitio: [rk8.dev](https://rk8.dev)
+
+Para consultas comerciales o de licenciamiento, contactar a ambas partes a través de los canales publicados en el sitio.

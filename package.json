@@ -2,6 +2,10 @@
   "name": "v2",
   "type": "module",
   "version": "0.0.1",
+  "description": "Sitio web oficial de PinoleroPrints",
+  "author": "PinoleroPrints y RK8 (-RK8HQ)",
+  "license": "UNLICENSED",
+  "private": true,
   "packageManager": "pnpm@11.10.0",
   "engines": {
     "node": ">=22.12.0"
