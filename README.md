@@ -129,7 +129,7 @@ El despliegue es automático: cada push a `main` dispara el workflow [`.github/w
 
 Este software es una obra desarrollada en colaboración entre **PinoleroPrints** y **RK8**, y se distribuye bajo una **licencia propietaria restrictiva**. Copyright © 2026 PinoleroPrints y RK8 (-RK8HQ). **Todos los derechos reservados.**
 
-Los derechos de propiedad intelectual son **cotitulares**: ninguna de las partes puede otorgar licencias, ceder o autorizar el uso del software a terceros sin el consentimiento previo y por escrito de la otra. No se concede permiso para copiar, clonar, bifurcar (fork), redistribuir, modificar, sublicenciar ni utilizar este software, su código fuente o sus recursos con fines comerciales o de cualquier otra índole. El acceso al repositorio no otorga ningún derecho de uso.
+Los derechos de propiedad intelectual son **cotitulares**: ninguna de las partes puede otorgar licencias, ceder o autorizar el uso del software a terceros sin el consentimiento previo y por escrito de la otra. No se concede permiso para bifurcar (fork), redistribuir, modificar, sublicenciar ni utilizar este software, su código fuente o sus recursos con fines comerciales o de cualquier otra índole. El acceso al repositorio no otorga ningún derecho de uso.
 
 Las marcas y elementos de identidad de cada parte pertenecen a su respectivo titular. En caso de conflicto con un contrato escrito entre ambas partes, prevalece el contrato.
 
